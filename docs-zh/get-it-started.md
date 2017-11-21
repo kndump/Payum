@@ -1,40 +1,42 @@
-# Get it started.
+# 开始.
 
-Here we describe basic steps required by all supported gateways. We are going to setup models, storages, a security layer and so on.
-All that stuff will be used later.
+我们将在这里描述所有被支持的网关都需要的一些基本步骤：配置模型，存储和安全层等。
+所有这些东西都会在后面被使用。
 
-_**Note**: If you are working with Symfony2 framework look read the bundle's [documentation](index.md#symfony-payum-bundle) instead._
+_**Note**: 如果你正在使用Symfony2框架，参阅 [该篇文档](index.md#symfony-payum-bundle)._
 
-_**Note**: If you are working with Laravel5 framework look read the bundle's [documentation](index.md#laravel-payum-package) instead._
+_**Note**: 如果你正在使用Laravel5框架，参阅 [该篇文档](index.md#laravel-payum-package)._
 
-## Install
+## 安装
 
-The preferred way to install the library is using [composer](http://getcomposer.org/).
-Run composer require to add dependencies to _composer.json_:
+安装本库的推荐方式是使用 [composer](http://getcomposer.org/).
+执行 `composer require` 以便在 _composer.json_ 文件中添加该依赖:
 
 ```bash
 php composer.phar require payum/offline php-http/guzzle6-adapter
 ```
 
-_**Note**: Where payum/offline is a php payum extension, you can for example change it to payum/paypal-express-checkout-nvp or payum/stripe. Look at [supported gateways](supported-gateways.md) to find out what you can use._
+_**说明**: payum/offline 是payum的其中一个扩展，你也可以使用 payum/paypal-express-checkout-nvp 或 payum/stripe。 参阅 [支持的网关](supported-gateways.md) to find out what you can use._
 
-_**Note**: Use payum/payum if you want to install all gateways at once._
+_**说明**: 如果你想一次性安装所有的网关，直接使用 payum/payum._
 
-_**Note**: Use php-http/guzzle6-adapter is just an example. You can use any of [these adapters](https://packagist.org/providers/php-http/client-implementation)._
+_**说明**: 使用 php-http/guzzle6-adapter 也只是一个示例。 你可以在 [这些适配器](https://packagist.org/providers/php-http/client-implementation)中任选一个使用._
 
-Before we configure the payum let's look at the flow diagram.
-This flow is same for all gateways so once you familiar with it any other gateways could be added easily.
+在我们开始配置payum之前，让我们先看一下下面的流程图。
+这个流程适用于所有的网关，一旦你熟悉了它，便可以轻松的添加任何其他的网关。
 
-![How payum works](http://www.websequencediagrams.com/cgi-bin/cdraw?lz=cGFydGljaXBhbnQgcGF5cGFsLmNvbQoACwxVc2VyAAQNcHJlcGFyZS5waHAAHA1jYXB0dQAFE2RvbgAnBgpVc2VyLT4ANQs6AEUIIGEgcGF5bWVudAoAVAstLT4rAEsLOgBbCCB0b2tlbgoKAGcLLS0-AIE2CjogcmVxdWVzdCBhdXRoZW50aWNhdGlvbgoAgVkKLS0-AE0NZ2l2ZSBjb250cm9sIGJhY2sATg8tAIE-CDoAgUsFAHsHAIFTCC0-VXNlcjogc2hvdwCBQQggcmVzdWx0Cg&s=default)
+![payum是如果工作的](http://www.websequencediagrams.com/cgi-bin/cdraw?lz=cGFydGljaXBhbnQgcGF5cGFsLmNvbQoACwxVc2VyAAQNcHJlcGFyZS5waHAAHA1jYXB0dQAFE2RvbgAnBgpVc2VyLT4ANQs6AEUIIGEgcGF5bWVudAoAVAstLT4rAEsLOgBbCCB0b2tlbgoKAGcLLS0-AIE2CjogcmVxdWVzdCBhdXRoZW50aWNhdGlvbgoAgVkKLS0-AE0NZ2l2ZSBjb250cm9sIGJhY2sATg8tAIE-CDoAgUsFAHsHAIFTCC0-VXNlcjogc2hvdwCBQQggcmVzdWx0Cg&s=default)
 
-As you can see we have to create some php files: `config.php`, `prepare.php`, `capture.php` and `done.php`.
-At the end you will have the complete solution and 
-it would be [much easier to add](paypal/express-checkout/get-it-started.md) other gateways.
-Let's start from the `config.php` and continue with rest after:
+如你所见，我们需要创建一些php文件: `config.php`, `prepare.php`, `capture.php` 和 `done.php`.
+最后你会拥有一套完整的解决方案，
+它也可以 [轻松的添加](paypal/express-checkout/get-it-started.md) 其他网关.
+让我们从 `config.php` 开始，然后再继续创建其他文件:
 
 ## config.php
 
-Here we can put our gateways, storages. Also we can configure security components. The `config.php` has to be included to all left files.
+我们可以在这里放置我们的网关，存储。
+当然，我们也可以配置一些安全组件。
+剩下的其他文件都需要包含`config.php`。
 
 ```php
 <?php
@@ -57,15 +59,15 @@ $payum = (new PayumBuilder())
 ;
 ```
 
-_**Note**: There are other [storages](storages.md) available. Such as Doctrine ORM\MongoODM._
+_**说明**: 也有其他可用的 [存储](storages.md)。 例如 Doctrine ORM\MongoODM._
 
-_**Note**: Consider using something other than `FilesystemStorage` in production._
+_**说明**: 在生产环境应该考虑使用其他存储方式，而不是 `文件系统存储`。_
 
 ## prepare.php
 
-At this stage we have to create an order. Add some information into it. 
-Create a capture token and delegate the job to [capture.php](examples/capture-script.md) script.
-Here's an offline gateway example:
+在这一步，我们会创建一个订单，并设置一些相关信息。 
+创建一个支付令牌并交付给 [capture.php](examples/capture-script.md) 继续处理.
+这是一个`离线`网关的示例:
 
 ```php
 <?php
@@ -87,8 +89,8 @@ $payment->setClientId('anId');
 $payment->setClientEmail('foo@example.com');
 
 $payment->setDetails(array(
-  // put here any fields in a gateway format.
-  // for example if you use Paypal ExpressCheckout you can define a description of the first item:
+  // 按照网关要求的格式在这里放置其他任何字段
+  // 例如，如果你使用Paypal ExpressCheckout，可以在这里定义第一条记录的描述信息
   // 'L_PAYMENTREQUEST_0_DESC0' => 'A desc',
 ));
 
@@ -100,12 +102,13 @@ $captureToken = $payum->getTokenFactory()->createCaptureToken($gatewayName, $pay
 header("Location: ".$captureToken->getTargetUrl());
 ```
 
-_**Note**: There are examples for all [supported gateways](supported-gateways.md)._
+_**说明**: 这里有针对所有 [被支持的网关](supported-gateways.md)的示例。_
 
 ## capture.php
 
-When the preparation is done a user is redirect to `capture.php`. Here's an example of this file. You can just copy\past the code. 
-It has to work for all gateways without any modification from your side. 
+当准备工作完成之后，用户会被重定向到 `capture.php`。 
+这里是一个`capture.php`文件的示例。
+你可以只是简单的复制/粘贴这些代码，它不需要任何修改就可以适用于所有网关。
 
 ```php
 <?php
@@ -136,13 +139,13 @@ $payum->getHttpRequestVerifier()->invalidate($token);
 header("Location: ".$token->getAfterUrl());
 ```
 
-_**Note**: Find out more about capture script in the [dedicated chapter](examples/capture-script.md)._
+_**说明**: 在[该章节](examples/capture-script.md)中查看更多`捕获`脚本._
 
 ## done.php
 
-After the capture did its job you will be redirected to [done.php](examples/done-script.md).
-The [capture.php](examples/capture-script.md) script always redirects you to `done.php` no matter the payment was a success or not.
-In `done.php` we may check the payment status, update the model, dispatch events and so on.
+在`捕获`完成了它的任务之后，你会被重定向到[done.php](examples/done-script.md)。
+不管支付是否成功，[capture.php](examples/capture-script.md) 永远都会把你重定向到 `done.php`。
+在 `done.php` 中，我们可以检查本次支付的状态，更新模型，分发事件等等。
 
 ```php
 <?php
@@ -156,14 +159,14 @@ include __DIR__.'/config.php';
 $token = $payum->getHttpRequestVerifier()->verify($_REQUEST);
 $gateway = $payum->getGateway($token->getGatewayName());
 
-// you can invalidate the token. The url could not be requested any more.
+// 你可以废弃本次令牌，这个url也就再不能被访问了。
 // $payum->getHttpRequestVerifier()->invalidate($token);
 
-// Once you have token you can get the model from the storage directly. 
+// 一旦你拿到了令牌，你就可以从存储中直接获取到模型 
 //$identity = $token->getDetails();
 //$payment = $payum->getStorage($identity->getClass())->find($identity);
 
-// or Payum can fetch the model for you while executing a request (Preferred).
+// 或者 payum 可以在执行请求的时候获取模型（推荐）.
 $gateway->execute($status = new GetHumanStatus($token));
 $payment = $status->getFirstModel();
 
@@ -178,6 +181,6 @@ echo json_encode([
 ]);
 ```
 
-_**Note**: Find out more about done script in the [dedicated chapter](examples/done-script.md)._
+_**说明**: 在 [该章节](examples/done-script.md)中了解更多的`完成`脚本._
 
-Back to [index](index.md).
+返回到 [首页](index.md).
