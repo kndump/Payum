@@ -1,116 +1,116 @@
-# Payum docs
+# Payum 文档
 
-* ### General
-    * [Get it started](get-it-started.md)
-    * [Architecture](the-architecture.md)
-    * [Storages](storages.md)
-    * [Configure gateway in backend](configure-gateway-in-backend.md)
-    * [Encrypt gateway configs stored in database](encrypt-gateway-configs-stored-in-database.md)
-    * [Working with sensitive information](working-with-sensitive-information.md)
-    * [Mask credit card number](mask-credit-card-number.md)
-    * [Instant payment notification](instant-payment-notification.md)
-    * [Develop gateway with payum](develop-gateway-with-payum.md)
-    * [Supported gateways](supported-gateways.md)
-    * [Frameworks and e-commerce integration](frameworks-and-e-commerce-integration.md)
-    * [Logger](logger.md)
-    * [Debugging](debugging.md)
-    * [ISO4217. Currency details](iso4217-or-currency-details.md)
-    * [Payum vs Omnipay](payum-vs-omnipay.md)
+* ### 概览
+    * [开始](get-it-started.md)
+    * [结构](the-architecture.md)
+    * [存储](storages.md)
+    * [后端配置网关](configure-gateway-in-backend.md)
+    * [加密存储在数据库中的网关配置](encrypt-gateway-configs-stored-in-database.md)
+    * [处理敏感信息](working-with-sensitive-information.md)
+    * [信用卡号码打码](mask-credit-card-number.md)
+    * [便捷的支付通知](instant-payment-notification.md)
+    * [基于payum开发网关](develop-gateway-with-payum.md)
+    * [已被支持的网关](supported-gateways.md)
+    * [框架集成和电子商务平台集成](frameworks-and-e-commerce-integration.md)
+    * [日志](logger.md)
+    * [调试](debugging.md)
+    * [ISO4217. 币种详情](iso4217-or-currency-details.md)
+    * [Payum和Omnipay对比](payum-vs-omnipay.md)
     * [PHP7](php7.md)
-    * [Symfony. The event dispatcher extension](event-dispatcher.md)
-    * [How to contribute from sub repository](how-to-contribute-from-subrepository.md)
+    * [Symfony. 事件分发扩展](event-dispatcher.md)
+    * [如何在子仓库中贡献代码](how-to-contribute-from-subrepository.md)
 
 * ### Authorize.Net AIM
-    * [Get it started](authorize-net/aim/get-it-started.md)
+    * [开始](authorize-net/aim/get-it-started.md)
     
 * ### Be2Bill
-    * [Direct](be2bill/direct.md)
-    * [Offsite](be2bill/offsite.md)
+    * [直连](be2bill/direct.md)
+    * [线下](be2bill/offsite.md)
 
 * ### Klarna Checkout
-    * [Get it started](klarna/checkout/get-it-started.md)
+    * [开始](klarna/checkout/get-it-started.md)
     
 * ### Klarna Invoice
-    * [Get it started](klarna/invoice/get-it-started.md)
+    * [开始](klarna/invoice/get-it-started.md)
     
 * ### Offline 
-    * [Get it started](offline/get-it-started.md)
+    * [开始](offline/get-it-started.md)
 
 * ### Payex
-    * [Get it started](payex/get-it-started.md)
+    * [开始](payex/get-it-started.md)
     
 * ### Paypal Express Checkout
-    * [Get it started](paypal/express-checkout/get-it-started.md)
-    * [Authorize order](paypal/express-checkout/authorize-order.md)
-    * [Confirm order step](paypal/express-checkout/confirm-order-step.md)
-    * [Recurring payments basics](paypal/express-checkout/recurring-payments-basics.md)
-    * [Cancel recurring payment](paypal/express-checkout/cancel-recurring-payment.md)
-    * [Authorize token custom query parameters](paypal/express-checkout/authorize-token-custom-query-parameters.md)
+    * [开始](paypal/express-checkout/get-it-started.md)
+    * [`预授权`订单](paypal/express-checkout/authorize-order.md)
+    * [确认订单流程](paypal/express-checkout/confirm-order-step.md)
+    * [定期扣款的基础知识](paypal/express-checkout/recurring-payments-basics.md)
+    * [取消定期扣款](paypal/express-checkout/cancel-recurring-payment.md)
+    * [针对`预授权`的自定义查询参数](paypal/express-checkout/authorize-token-custom-query-parameters.md)
 
 * ### Paypal Pro Checkout
-    * [Get it started](paypal/pro-checkout/get-it-started.md)
+    * [开始](paypal/pro-checkout/get-it-started.md)
 
 * ### Paypal Pro Hosted 
-    * [Get it started](paypal/pro-hosted/get-it-started.md)
+    * [开始](paypal/pro-hosted/get-it-started.md)
 
 * ### Paypal Masspay
-    * [Get it started](paypal/masspay/get-it-started.md)
+    * [开始](paypal/masspay/get-it-started.md)
     
 * ### Paypal Rest
-    * [Get it started](paypal/rest/get-it-started.md)
-    * [Credit card purchase](paypal/rest/credit-card-purchase.md)
+    * [开始](paypal/rest/get-it-started.md)
+    * [信用卡支付](paypal/rest/credit-card-purchase.md)
 
 * ### Paypal IPN
-    * [Get it started](paypal/ipn/get-it-started.md)
+    * [开始](paypal/ipn/get-it-started.md)
 
 * ### Sofort  
-    * [Get it started](sofort/get-it-started.md)
-    * [Disable notifications](sofort/disable-notifications.md)
+    * [开始](sofort/get-it-started.md)
+    * [禁用通知](sofort/disable-notifications.md)
     
 * ### Stripe
     * [Stripe.js](stripe/js.md)
-    * [Checkout](stripe/checkout.md)
-    * [Direct](stripe/direct.md)
+    * [结算](stripe/checkout.md)
+    * [直连](stripe/direct.md)
     * [Raw capture](stripe/raw-capture.md)
-    * [Store Card and use later](stripe/store-card-and-use-later.md)
-    * [Subscription billing](stripe/subscription-billing.md)
+    * [存储卡信息便于后续使用](stripe/store-card-and-use-later.md)
+    * [订阅账单](stripe/subscription-billing.md)
     
 * ### Symfony. Payum Bundle
-    * [Get it started. Capture](symfony/get-it-started.md)
-    * [Authorize](symfony/authorize.md)
-    * [Refund](symfony/refund.md)
-    * [Storages](symfony/storages.md)
-    * [Done action](symfony/purchase-done-action.md)
-    * [Configure payment in backend](symfony/configure-payment-in-backend.md)
-    * [Custom action usage](symfony/custom-action-usage.md)
-    * [Custom api usage](symfony/custom-api-usage.md)
-    * [Custom purchase examples](symfony/custom-purchase-examples.md)
-    * [Sandbox](symfony/sandbox.md)
-    * [Console commands](symfony/console-commands.md)
-    * [Debugging](symfony/debugging.md)
-    * [Configuration reference](symfony/configuration-reference.md)
-    * [Container tags](symfony/container-tags.md)
-    * [ISO4217. Currency details](symfony/iso4217-or-currency-details.md)
+    * [开始. Capture](symfony/get-it-started.md)
+    * [预授权](symfony/authorize.md)
+    * [退款](symfony/refund.md)
+    * [存储](symfony/storages.md)
+    * [`完成`行为](symfony/purchase-done-action.md)
+    * [在后端配置支付](symfony/configure-payment-in-backend.md)
+    * [自定义行为的使用](symfony/custom-action-usage.md)
+    * [自定义API的使用](symfony/custom-api-usage.md)
+    * [自定义支付的示例](symfony/custom-purchase-examples.md)
+    * [沙箱](symfony/sandbox.md)
+    * [终端命令](symfony/console-commands.md)
+    * [调试](symfony/debugging.md)
+    * [配置指南](symfony/configuration-reference.md)
+    * [`容器`标签](symfony/container-tags.md)
+    * [ISO4217. 币种详解](symfony/iso4217-or-currency-details.md)
 
 * ### Laravel. Payum Package
-    * [Get it started](laravel/get-it-started.md)
-    * [Examples](laravel/examples.md)
-    * [Eloquent storage](laravel/eloquent-storage.md)
-    * [Payment done controller](laravel/payment-done-controller.md)
-    * [Store gateway config in database](laravel/store-gateway-config-in-database.md)
-    * [Blade templates](laravel/blade-templating.md)
+    * [开始](laravel/get-it-started.md)
+    * [示例](laravel/examples.md)
+    * [Eloquent 存储](laravel/eloquent-storage.md)
+    * [`支付完成`控制器](laravel/payment-done-controller.md)
+    * [在数据库中存储网关配置](laravel/store-gateway-config-in-database.md)
+    * [Blade模板](laravel/blade-templating.md)
     
 * ### Silex. Payum Provider
-    * [Get it started](silex/get-it-started.md)
-    * [Payment done controller](silex/payment-done-controller.md)
+    * [开始](silex/get-it-started.md)
+    * [`支付完成`控制器](silex/payment-done-controller.md)
     
 * ### Symfony. JMS Payment Bridge
-    * [Get it started. Capture](jms-payment-bridge/get-it-started.md)
+    * [开始. Capture](jms-payment-bridge/get-it-started.md)
 
-* ### [Zend. Payum Module (External)](https://github.com/Payum/PayumModule)
+* ### [Zend. Payum 模块 (外部的)](https://github.com/Payum/PayumModule)
 
-* ### [Yii. Payum Extension (External)](https://github.com/Payum/PayumYiiExtension)
+* ### [Yii. Payum 扩展 (外部的)](https://github.com/Payum/PayumYiiExtension)
 
-* ### [Omnipay Bridge (External)](https://github.com/Payum/OmnipayBridge)
+* ### [Omnipay 桥接 (外部的)](https://github.com/Payum/OmnipayBridge)
 
-* ### [Payum Server (External)](https://github.com/Payum/PayumServer)
+* ### [Payum 服务器 (外部的)](https://github.com/Payum/PayumServer)
