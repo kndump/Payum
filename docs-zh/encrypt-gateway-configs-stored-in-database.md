@@ -1,18 +1,18 @@
-# Encrypt gateway configs stored in database
+# 在数据库中加密存储网关配置
 
-To encrypt (and later decrypt) sensitive configuration details (like payment provider credentials) we have to do two things:
+为了加密（和稍后解密）敏感的配置信息（比如支付提供者凭证），我们需要做两件事情：
+
+* 保证模型实现了 `CryptedInterface`。`GatewayConfig` 类以及实现了该接口。
+* 创建一个加密器的实例。
+* 将存储包装到 `CryptoStorageDecorator` 装饰器中。
  
-* Make sure model implements `CryptedInterface`. The `GatewayConfig` class already does it.
-* Create a cypher instance. 
-* Wrap the storage into `CryptoStorageDecorator` decorator.
-
-First, we have to install an encryption library `defuse/php-encryption`
+首先，我们要安装一个用于加密的库 `defuse/php-encryption`。
 
 ```bash
 $ composer require defuse/php-encryption:^2
 ```
 
-Once the library is installed we can configure a storage:
+加密库安装好之后，我们就可以配置存储了：
 
 ```php
 <?php
@@ -24,7 +24,7 @@ use Payum\Core\Payum;
 
 /** @var \Payum\Core\Storage\StorageInterface $realStorage */
 
-// the secret has to be stored somewhere and used for all future usages.
+// 加密参数需要被保存下来，在以后会被用到
 $secret = \Defuse\Crypto\Key::createNewRandomKey()->saveToAsciiSafeString();
 $cypher = new \Payum\Core\Bridge\Defuse\Security\DefuseCypher($secret);
 
@@ -39,4 +39,4 @@ $payum = (new PayumBuilder())
 ;
 ```
 
-Back to [index](index.md).
+返回 [首页](index.md).
