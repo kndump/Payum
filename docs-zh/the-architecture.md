@@ -1,13 +1,14 @@
-# The architecture
+# 应用架构
 
-The code snippets presented below are only for demonstration purposes (pseudo code). Their goal is to illustrate the general approach to various tasks. To see real life examples please follow the links provided when appropriate.
-In general, you have to create a _[request][base-request]_ , implement _[action][action-interface]_ in order to know what to do with such request.
-And use _gateway_ that implements _[gateway interface][gateway-interface]_.
-This is where things get processed.
-This interface forces us to specify route to possible actions and can execute the request.
-So, gateway is the place where a request and an action meet together.
+下面展示的代码片段仅用于演示目的（伪代码）。
+它们是为了说明各种任务的一般实现方式。
+如果要了解更实用的例子，可以参考在它们下面给出的链接。
+一般来说，你需要创建一个_[请求][base-request]_，为了知道该如何处理这些请求还需要实现_[行为][action-interface]_。
+使用实现了_[网关接口][gateway-interface]_的_网关_，所有的事情都是经由网关处理的。
+网关接口强制要求我们指定执行`请求`所使用的所有可能的`行为`。
+所以说，网关是`请求`和`行为`交汇的场所。
 
-_**Note**: If you'd like to see real world examples we have provided you with a sandbox: [online][sandbox-online], [code][sandbox-code]._
+_**说明**: 如果你想了解更实用的示例，我们提供了沙箱环境: [在线演示][sandbox-online], [代码][sandbox-code]._
 
 ```php
 <?php
@@ -17,11 +18,11 @@ use Payum\Core\Request\Capture;
 $gateway = new Gateway;
 $gateway->addAction(new CaptureAction);
 
-//CaptureAction does its job.
+//CaptureAction 真正完成相应工作
 $gateway->execute($capture = new Capture(array(
     'amount' => 100,
     'currency' => 'USD'
-));
+)));
 
 var_export($capture->getModel());
 ```
@@ -37,7 +38,7 @@ class CaptureAction implements ActionInterface
     {
        $model = $request->getModel();
 
-       //capture payment logic here
+       //在这里实现真正`捕获`支付的逻辑
 
        $model['status'] = 'success';
        $model['transaction_id'] = 'an_id';
@@ -50,14 +51,15 @@ class CaptureAction implements ActionInterface
 }
 ```
 
-That's the big picture. Now let's talk about the details:
+上面展示的是一个大致的流程。现在我们来讨论一下细节：
 
-_**Link**: See a real world example: [CaptureController][capture-controller]._
+_**链接**: 参阅一个更实用的例子: [CaptureController][capture-controller]._
 
-## Sub Requests
+## 子请求
 
-An action does not want to do all the job alone, so it delegates some responsibilities to other actions. In order to achieve this the action must be a _gateway aware_ action.
-Only then, it can create a sub request and pass it to the gateway.
+一个`行为`并不想单独完成所有的工作，因此它会委托一些任务给其他`行为`。
+为了达到这种目的，这个`行为`必须是一个_有网关意识的(gateway aware)_`行为`。
+只有这样，它才能创建出一个子请求继续传递给网关。
 
 ```php
 <?php
@@ -76,18 +78,22 @@ class FooAction implements ActionInterface, GatewayAwareInterface
         // delegate some job to bar action.
         $this->gateway->execute(new BarRequest);
     }
+    
+    public function supports($request) {
+        // TODO: Implement supports() method.
+    }
 }
 ```
 
-_**Link**: See paypal [CaptureAction][paypal-capture-action]._
+_**链接**: 参阅 paypal [CaptureAction][paypal-capture-action]._
 
-## Replys
+## 响应
 
-What about redirects or a credit card form? Some gateways, 
-like Paypal ExpressCheckout for instance, require authorization on their side. 
-Payum can handle such cases and for that we use something called _[replys][base-reply]_.
-It is a special object which extends an exception hence could be thrown.
-You can throw a http redirect reply for example at any time and catch it at a top level.
+重定向或者信用卡提交表单又是怎么样的呢？
+一些网关，例如Paypal ExpressCheckout，需要在它们自己的页面做认证。
+Payum可以使用被我们称为_[响应][base-reply]_的东西来处理这种情况。
+这是一个继承自异常的特殊对象，可以像异常一样被抛出。
+你可以在任何时候抛出一个http重定向`响应`，并在最顶层捕获它。
 
 ```php
 <?php
@@ -100,12 +106,16 @@ class FooAction implements ActionInterface
     {
         throw new HttpRedirect('http://example.com/auth');
     }
+    
+    public function supports($request) {
+        // TODO: Implement supports() method.
+    }
 }
 ```
 
-Above we see an action which throws a reply.
-The reply is about redirecting a user to another url.
-Next code example demonstrate how you catch and process it.
+上面我们看到了抛出了一个`响应`的`行为`。
+这个`响应可以把用户重定向到一个新的链接。
+下面的代码示例就演示了我们怎么捕获并处理这个响应。
 
 ```php
 <?php
@@ -123,13 +133,13 @@ try {
 }
 ```
 
-_**Link**: See real world example: [AuthorizeTokenAction][paypal-authorize-token-action]._
+_**链接**: 了解更实用的示例请参阅: [AuthorizeTokenAction][paypal-authorize-token-action]._
 
-## Managing status
+## 管理状态
 
-Good status handling is very important.
-Statuses must not be hard coded and should be easy to reuse, hence we use the _[interface][status-request-interface]_ to handle this.
-The [Status request][status-request] is provided by default by our library, however you are free to use your own and you can do so by implementing the status interface.
+一个好的状态处理是很重要的。
+状态不应该被硬编码，且应该很容易被复用。为此，我们使用了_[请求状态接口][status-request-interface]_。
+在我们的库中默认提供了一套[请求状态][status-request]，你也可以通过实现状态接口(status interface)来自由的使用你自己定义的状态。
 
 ```php
 <?php
@@ -174,14 +184,14 @@ $status->isPending();
 $status->getValue();
 ```
 
-_**Link**: The status logic could be a bit complicated [as paypal one][paypal-status-action] or pretty simple as [authorize.net one][authorize-status-action]._
+_**链接**: 状态逻辑可以像[paypal one][paypal-status-action]一样复杂，也可以像[authorize.net one][authorize-status-action]一样简单._
 
-## Extensions
+## 扩展
 
-There must be a way to extend the gateway with custom logic.
-_[Extension][extension-interface]_ to the rescue.
-Let's look at the example below.
-Imagine you want to check permissions before a user can capture the payment:
+肯定应该有一种实现自有逻辑的网关的方式。
+_[扩展][extension-interface]_就是用来干这个的。
+我们来一起看下面的例子。
+假设在用户要`捕获`一笔支付前，你想要检查一下用户权限：
 
 ```php
 <?php
@@ -200,6 +210,14 @@ class PermissionExtension implements ExtensionInterface
 
         // congrats, user has enough rights.
     }
+    
+    public function onExecute(Context $context) {
+        // TODO: Implement onExecute() method.
+    }
+    
+    public function onPostExecute(Context $context) {
+        // TODO: Implement onPostExecute() method.
+    }
 }
 ```
 
@@ -213,17 +231,17 @@ $gateway->addExtension(new PermissionExtension);
 $gateway->execute(new FooRequest);
 ```
 
-_**Link**: The [storage extension][storage-extension-interface] is a built-in extension._
+_**链接**: [存储扩展][storage-extension-interface] 是一个内建的扩展._
 
-## Persisting models
+## 持久化模型
 
-Before you are redirected to the gateway side, you may want to store data somewhere, right?
-We take care of that too.
-This is handled by _[storage][storage-interface]_ and its _[storage extension][storage-extension-interface]_ for gateway.
-The extension can solve two tasks.
-First it can save a model after the request is processed.
-Second, it can find a model by its id before the request is processed.
-Currently [Doctrine][doctrine-storage] [Zend Table Gateway][zend-table-gateway] and [filesystem][filesystem-storage] (use it for tests only!) storages are supported.
+在被重定向到网关之前，你可能想要在某些地方存储下一些相关信息，对吧？
+我们也考虑到了这种情况。
+_[存储][storage-interface]_ 和它的 _[相关扩展][storage-extension-interface]_ 就是用来处理这种情况的。
+存储扩展可以用来解决两种情况。
+首先，它可以在请求被处理之后储存下该模型。
+其次，它可以在请求被处理之前查询到相关模型。
+当前已被支持的储存有[Doctrine][doctrine-storage] [Zend Table Gateway][zend-table-gateway] 和 [文件系统][filesystem-storage]（仅用于测试用途）
 
 ```php
 <?php
@@ -237,15 +255,15 @@ $gateway = new Gateway;
 $gateway->addExtension(new StorageExtension($storage));
 ```
 
-## All about API
+## 关于API
 
-The gateway API has different versions? Or, a gateway provide official sdk?
-We already thought about these problems and you know what?
+网关API有不同的版本？或者，网关本身提供了官方的SDK？
+你知道吗，我们也已经考虑到了这些问题。
 
-Let's say gateway have different versions: first and second.
-And in the `FooAction` we want to use first api and `BarAction` second one.
-To solve this problem we have to implement _API aware action_ to the actions.
-When such api aware action is added to a gateway it tries to set an API, one by one, to the action until the action accepts one.
+假设网关确实存在不同的版本，分别是：1.0和2.0。
+我们想在`FooAction`中使用1.0的版本，而在`BarAction`中想要使用2.0的版本。
+为了解决这个问题，我们需要在这两个行为中实现_有API意识的行为(API aware action)_。
+当这种有API意识的行为被加入到网关中，它会一个接着一个的去尝试设置API，直到该行为接受了其中一个。
 
 ```php
 <?php
@@ -268,6 +286,10 @@ class FooAction implements ActionInterface, ApiAwareInterface
     {
         $this->api; // Api::class 
     }
+    
+    public function supports($request) {
+        // TODO: Implement supports() method.
+    }
 }
 
 class BarAction implements ActionInterface, ApiAwareInterface
@@ -284,6 +306,10 @@ class BarAction implements ActionInterface, ApiAwareInterface
     {
         $this->api; // AnotherApi::class 
     }
+    
+    public function supports($request) {
+        // TODO: Implement supports() method.
+    }
 }
 ```
 
@@ -295,24 +321,24 @@ $gateway = new Gateway;
 $gateway->addApi(new FirstApi);
 $gateway->addApi(new SecondApi);
 
-// here the ApiVersionOne will be injected to FooAction
+// 在这里 ApiVersionOne 会被注入到 FooAction
 $gateway->addAction(new FooAction);
 
-// here the ApiVersionTwo will be injected to BarAction
+// 在这里 ApiVersionTwo 会被注入到 BarAction
 $gateway->addAction(new BarAction);
 ```
 
-_**Link**: See authorize.net [capture action][authorize-capture-action]._
+_**链接**: 参阅 authorize.net [capture action][authorize-capture-action]._
 
-## Conclusion
+## 总结
 
-As a result of the architecture described above we end up with a well decoupled, easy to extend and reusable library.
-For example, you can add your domain specific actions or a logger extension.
-Thanks to its flexibility any task could be achieved.
+基于如上我们描述的应用架构，我们最终得到了一个完全解耦，方便扩展和重用的库。
+比如，你可以添加自定义的行为或日志扩展。
+感谢它的灵活性，让我们可以实现任何任务。
 
-Next [Your order integration](your-order-integration.md).
+下一章节 [订单集成](your-order-integration.md).
 
-Back to [index](index.md).
+回到 [首页](index.md).
 
 [sandbox-online]: http://sandbox.payum.forma-dev.com
 [sandbox-code]: https://github.com/Payum/PayumBundleSandbox
