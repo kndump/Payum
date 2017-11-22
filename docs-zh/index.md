@@ -2,7 +2,7 @@
 
 * ### 概览
     * [开始](get-it-started.md)
-    * [结构](the-architecture.md)
+    * [应用架构](the-architecture.md)
     * [存储](storages.md)
     * [后端配置网关](configure-gateway-in-backend.md)
     * [加密存储在数据库中的网关配置](encrypt-gateway-configs-stored-in-database.md)

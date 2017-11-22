@@ -3,9 +3,9 @@
 我们将在这里描述所有被支持的网关都需要的一些基本步骤：配置模型，存储和安全层等。
 所有这些东西都会在后面被使用。
 
-_**Note**: 如果你正在使用Symfony2框架，参阅 [该篇文档](index.md#symfony-payum-bundle)._
+_**说明**: 如果你正在使用Symfony2框架，参阅 [该篇文档](index.md#symfony-payum-bundle)._
 
-_**Note**: 如果你正在使用Laravel5框架，参阅 [该篇文档](index.md#laravel-payum-package)._
+_**说明**: 如果你正在使用Laravel5框架，参阅 [该篇文档](index.md#laravel-payum-package)._
 
 ## 安装
 
