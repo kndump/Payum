@@ -107,7 +107,7 @@ class Payment extends BasePayment
 }
 ```
 
-下一步，需要创建一个入口管理器和Payum的存储：
+下一步，需要创建一个实体管理器和Payum的存储：
 
 ```php
 <?php
@@ -195,7 +195,7 @@ class Payment extends BasePayment
 }
 ```
 
-下一步, 需要创建一个入口管理器和payum的存储：
+下一步, 需要创建一个实体管理器和payum的存储：
 
 ```php
 <?php
