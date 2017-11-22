@@ -1,15 +1,16 @@
-# Configure gateway in backend
+# 在后端配置网关
 
-In [get it started](get-it-started.md) we showed you how to configure gateways in the code. 
-Sometimes you may asked to store gateways (mostly gateway credentials) to a database for example. 
-So the admin can edit them in the backend. Here's the basic example how to do it in plain php. 
+在 [开始章节](get-it-started.md) 我们已经展示了如何在代码中配置网关。
+有时候，你可能会想要在其他地方比如数据库中存储网关（大部分情况下是网关凭据）。
+以便管理员可以在后台对它们进行编辑。
+这里就展示了如何实现这种效果的基础示例。
    
-## Configure
+## 配置
 
-First we have to create an entity where we store information about a gateway. 
-The model must implement `Payum\Core\Model\GatewayConfigInterface`.
+首先，我们需要创建一个存储网关信息的实体。
+该模型必须必须实现 `Payum\Core\Model\GatewayConfigInterface`。
 
-_**Note**: In this chapter we use DoctrineStorage._
+_**说明**: 在本章节，我们使用 DoctrineStorage._
 
 ```php
 <?php
@@ -35,7 +36,7 @@ class GatewayConfig extends BaseGatewayConfig
 }
 ```
 
-Now, we have to create a storage for it and build payum with gateway config storage.
+现在，我们需要创建一个存储，并基于此构建payum。
 
 ```php
 <?php
@@ -46,7 +47,7 @@ use Payum\Core\PayumBuilder;
 use Payum\Core\Payum;
 use Payum\Core\Registry\DynamicRegistry;
 
-// $objectManager is an instance of doctrine object manager.
+// $objectManager 是一个doctrine对象管理的实例.
 
 $gatewayConfigStorage = new DoctrineStorage($objectManager, 'Acme\Payment\Entity\GatewayConfig');
 
@@ -59,7 +60,7 @@ $payum = (new PayumBuilder())
 ;
 ```
 
-## Store gateway config
+## 保存网关配置
 
 ```php
 <?php
@@ -82,7 +83,7 @@ $gatewayConfig->setConfig(array(
 $gatewayConfigStorage->update($gatewayConfig);
 ```
 
-## Use gateway
+## 使用网关
 
 ```php
 <?php
@@ -94,7 +95,7 @@ include __DIR__.'/config.php';
 $gateway = $payum->getGateway('paypal');
 ```
 
-Back to [index](index.md).
+返回 [首页](index.md).
 
  
  
