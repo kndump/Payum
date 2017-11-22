@@ -1,8 +1,8 @@
-# Mask credit card number.
+# 信用卡号码打码
 
-While working with credit cards it often needed to mask the number or card holder name.
-Here's the class you may use for that purpose.
-It is possible to configure mask symbol and the length of shown chars.
+在处理信用卡的方式上，会经常需要对卡号或持卡人姓名进行打码。
+这里有一个类可以实现此目的。
+它也可以配置打码的标识和展示的长度。
 
 ```php
 <?php
@@ -19,4 +19,4 @@ echo Mask::mask("4928-9012-abcd-3456", null, 8);
 // 4XXX-XXXX-abcd-3456
 ```
 
-Back to [index](index.md).
+返回 [首页](index.md).
