@@ -1,19 +1,20 @@
-# Instant payment notification.
+# 便捷的支付通知
 
-A notification is a callback. A gateway sends it back to you to let you know about changes.
-It could be due a refund or pending payment acceptance.
-The diagram shows two examples where notification could be very handy:
+通知就是一个回调。
+网关会回调通知你，以便让你知道支付状态的变化。
+它可能是由于一笔退款或支付被处理完成。
+该流程图展示了两个便捷通知的示例：
 
 ![notification](http://www.websequencediagrams.com/cgi-bin/cdraw?lz=cGFydGljaXBhbnQgUGF5cGFsCgAHDGNhcHR1cmUucGhwAAsNbm90aWZ5ABIFCgAZCy0-KwA_BjogYSBwdXJjYWhzZQoAUgYtPi0AQws6IHBlbmRpbmcAFggtPgBKCjogc3VjY2VzcwBiBmljYXRpb24AMTkARgcAVBZjYW5jZWxlZCAodXNlciB2b2lkIG9uIHAAggcFIHNpZGUp&s=default)
 
-If you follow [get it started](get-it-started.md) and used a payum builder to create paypal gateway,
-you do not have to care about notify url. Payum does it for you.
-You just have to make sure [notify script](examples/notify-script.md) is accessible from web.
+如果你参照 [开始章节](get-it-started.md)的描述使用payum构建器创建了一个paypal网关，
+你就不需要再关心回调地址了，payum已经为你实现了。
+你只需要保证 [回调脚本](examples/notify-script.md)是对外网公开的就可以。
 
-The model will be updated automatically once the notification is sent.
-What you have to do is add an extension to detect payment status changes, and act accordingly.
+一旦接收到通知，模型也会自动更新。
+你所需要做的就是添加一个扩展来检测支付状态的变更，并对此做出合适的处理。
 
-Here's an example of the extension:
+这是一个扩展的示例：
 
 ```php
 <?php
@@ -47,7 +48,7 @@ class PaymentStatusExtension implements ExtensionInterface
 
         $context->getGateway()->execute($status = new GetHumanStatus($payment));
 
-        // check the status and act accordingly
+        // 检查状态并做出合适的处理
     }
 
     /**
@@ -66,4 +67,4 @@ class PaymentStatusExtension implements ExtensionInterface
 }
 ```
 
-Back to [index](index.md).
+返回 [首页](index.md).
