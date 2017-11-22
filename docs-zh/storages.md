@@ -1,12 +1,11 @@
-# Storages
+# 存储
 
-Storage allow you save,fetch payment related information. 
-They could be used explicitly, it means you have to call save or fetch methods when it is required. 
-Or you can integrate a storage to a gateway using `StorageExtension`. 
-In this case every time gateway finish to execute a request it stores the information. 
-`StorageExtension` could also load a model by it is `Identificator` so you do not have to care about that.
+存储允许你保存，获取支付相关的信息。
+他们需要被明确的调用，也就是说在需要的时候，你必须主动调用保存或获取方法。
+或者，你也可以使用`存储扩展`将存储集成到一个网关中。
+`存储扩展`也可以通过它的`身份识别器(Identificator)`来加载模型，这种方式下，你就不必再过多的关心它了。
 
-Explicitly used example:
+显式调用的示例：
 
 ```php
 <?php
@@ -23,7 +22,7 @@ $storage->update($order);
 $foundOrder = $storage->find($order->getNumber());
 ```
 
-Implicitly used example: 
+隐式调用的示例：
 
 ```php
 <?php
@@ -36,7 +35,7 @@ $gateway->addExtension(new StorageExtension(
 ));
 ```
 
-Usage of a model identity with the extension:
+在扩展中使用模型识别器的用法:
 
 ```php
 <?php
@@ -66,7 +65,7 @@ echo get_class($capture->getModel());
 php composer.phar install "doctrine/orm"
 ```
 
-Add token and order classes:
+添加令牌和订单类：
 
 ```php
 <?php
@@ -108,7 +107,7 @@ class Payment extends BasePayment
 }
 ```
 
-next, you have to create an entity manager and Payum's storage:
+下一步，需要创建一个入口管理器和Payum的存储：
 
 ```php
 <?php
@@ -122,13 +121,13 @@ use Payum\Core\Bridge\Doctrine\Storage\DoctrineStorage;
 $config = new Configuration();
 $driver = new MappingDriverChain;
 
-// payum's basic models
+// payum的基础模型
 $driver->addDriver(
     new SimplifiedXmlDriver(array('path/to/Payum/Core/Bridge/Doctrine/Resources/mapping' => 'Payum\Core\Model')), 
     'Payum\Core\Model'
 );
 
-// your models
+// 自定义的模型
 $driver->addDriver(
     $config->newDefaultAnnotationDriver(array('path/to/Acme/Entity'), false), 
     'Acme\Entity'
@@ -196,7 +195,7 @@ class Payment extends BasePayment
 }
 ```
 
-next, you have to create an entity manager and Payum's storage:
+下一步, 需要创建一个入口管理器和payum的存储：
 
 ```php
 <?php
@@ -216,7 +215,7 @@ Type::addType('object', 'Payum\Core\Bridge\Doctrine\Types\ObjectType');
 
 $driver = new MappingDriverChain;
 
-// payum's basic models
+// payum的基础模型
 $driver->addDriver(
     new XmlDriver(
        new SymfonyFileLocator(array(
@@ -227,7 +226,7 @@ $driver->addDriver(
     'Payum\Core\Model'
 );
 
-// your models
+// 自定义的模型
 AnnotationDriver::registerAnnotationClasses();
 $driver->addDriver(
     new AnnotationDriver(new AnnotationReader(), array(
@@ -273,37 +272,36 @@ $storage = new FilesystemStorage(
 
 ## Propel 2
 
-First, you have to generate the model base classes.
+首先，你需要生成基础模型类。
 
-To do that, you have to create a configuration file. 
-Please take a look at [propel's documentation](http://propelorm.org/documentation/02-buildtime.html#building-the-model) to write that file.
+为此，你还需要创建一个配置文件。
+请参阅 [propel的文档](http://propelorm.org/documentation/02-buildtime.html#building-the-model).
 
-Then run:
+接着，执行：
 ```sh
 $ bin/propel --config-dir=path/where/you/created/propel.ext --schema-dir=src/Payum/Core/Bridge/Propel2/Resources/config --output-dir=src/ build
 ```
 
-Then you can insert ```src/Payum/Core/Bridge/Propel2/Resources/install/order.sql``` and ```src/Payum/Core/Bridge/Propel2/Resources/install/token.sql```
-in your database(s).
+接着，你可以把 ```src/Payum/Core/Bridge/Propel2/Resources/install/order.sql``` 和 ```src/Payum/Core/Bridge/Propel2/Resources/install/token.sql``` 导入数据库。
 
-You can copy the ```schema.xml``` file into your project resources and customize it.
-If you customize your ```schema.xml``` you'll have to generate the table creation sql file.
-You only have to run:
+你可以拷贝一份 ```schema.xml``` 文件到自己的项目中并自定义修改它。
+如果修改了 ```schema.xml``` 文件，你还需要生成创建表的sql文件。
+然后，你只需要执行：
 ```sh
 $ bin/propel --config-dir=your/path/to/propel.xml/directory --schema-dir=your/path/to/schema.xml/directory --output-dir=your-application/resources/ sql:build
 ```
 
-If you want to add your own logic to the model classes, you can extend the following classes:
+如果你想要在模型类总添加自己的逻辑，则需要扩展如下类文件：
 - ```Payum\Core\Bridge\Propel2\Model\Payment```
 - ```Payum\Core\Bridge\Propel2\Model\OrderQuery```
 - ```Payum\Core\Bridge\Propel2\Model\Token```
 - ```Payum\Core\Bridge\Propel2\Model\TokenQuery```
 
-If you don't want to, you only have to use them.
+如果你不需要修改模型类中的逻辑，就可以直接使用了。
 
-Then, you have to configure a connection.
+接着，你还需要配置一个连接。
 
-Here's a snippet adapted from propel [documentation](http://propelorm.org/documentation/02-buildtime.html#runtime-connection-settings):
+这里是一份根据[propel文档](http://propelorm.org/documentation/02-buildtime.html#runtime-connection-settings)做过适配后的代码片段：
 
 ```php
 <?php
@@ -321,9 +319,9 @@ $manager->setConfiguration(array (
 $serviceContainer->setConnectionManager('default', $manager);
 ```
 
-## Custom.
+## 自定义
 
-You can create your own custom storage. To do so just implement `StorageInterface`.
+你可以创建自定义的存储方式。为此你只需要实现`StorageInterface`即可。
 
 ```php
 <?php
@@ -337,7 +335,7 @@ class CustomStorage implements StorageInterface
 
 ## TODO
 
-* [Pdo](http://php.net/manual/en/book.pdo.php) Storage - https://github.com/Payum/Payum/issues/205
-* [Yii ActiveRecord](http://www.yiiframework.com/doc/guide/1.1/en/database.ar) Storage - https://github.com/Payum/PayumYiiExtension/pull/4
+* [Pdo](http://php.net/manual/en/book.pdo.php) 存储 - https://github.com/Payum/Payum/issues/205
+* [Yii ActiveRecord](http://www.yiiframework.com/doc/guide/1.1/en/database.ar) 存储 - https://github.com/Payum/PayumYiiExtension/pull/4
 
-* [Back to index](index.md).
+* [返回首页](index.md).
