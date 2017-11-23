@@ -1,14 +1,14 @@
-# Frameworks and e-commerce integration.
+# 框架集成和电子商务平台集成
 
-## Frameworks.
+## 框架
 
-* [PayumBundle](index.md#symfony-payum-bundle) for [Symfony2](http://symfony.com/).
-* [PayumSilexProvider](index.md#silex-payum-provider) for [Silex](http://silex.sensiolabs.org/)
-* [PayumLaravelPackage](index.md#laravel-payum-package) for [Laravel](http://laravel.com/)
-* [PayumModule](index.md#zend-payum-module-external) for [Zend2](http://framework.zend.com/)
-* [PayumYiiExtension](index.md#yii-payum-extension-external) for [Yii](http://www.yiiframework.com/)
+* [PayumBundle](index.md#symfony-payum-bundle) 适配 [Symfony2](http://symfony.com/).
+* [PayumSilexProvider](index.md#silex-payum-provider) 适配 [Silex](http://silex.sensiolabs.org/)
+* [PayumLaravelPackage](index.md#laravel-payum-package) 适配 [Laravel](http://laravel.com/)
+* [PayumModule](index.md#zend-payum-module-external) 适配 [Zend2](http://framework.zend.com/)
+* [PayumYiiExtension](index.md#yii-payum-extension-external) 适配 [Yii](http://www.yiiframework.com/)
 
-## Storages.
+## 存储
 
 * Doctrine ORM\MongoODM
 * Propel1
@@ -17,22 +17,26 @@
 * Elouqent
 * Filesystem
 
-## E-Commerce
+## 电子商务平台
 
 * [Sylius](http://sylius.com/).
 
-Sylius is a modern e-commerce platform built on symfony2 framework. It already integrated payum. More details could be found in initial [Pull Request](https://github.com/Sylius/Sylius/pull/275).
+Sylius 是一个基于symfony2构建的一个现代化电子商务平台。它已经集成了payum。
+更多详情可以参阅[Pull Request](https://github.com/Sylius/Sylius/pull/275)。
 
 * [Vespolina](http://vespolina.org/).
 
-Vespolina another one e-commerce solution. It's also built on top of symfony2 framework. It is in the integration phase. More details could be found in the [Pull Request](https://github.com/vespolina/vespolina-sandbox/pull/107).
+Vespolina 是另外一个电子商务解决方案，也是基于symfony2构建，还处于集成阶段。
+更多详情参阅[Pull Request](https://github.com/vespolina/vespolina-sandbox/pull/107)。
 
 * [Speckcommerce](https://github.com/speckcommerce/speck).
 
-Speckcommerce is a shop solution for zend framework2 developers. They have [plans to integrate payum](https://github.com/speckcommerce/SpeckPaypal/issues/8).
+Speckcommerce是一个基于zend framework2的在线商城。
+他们也有[集成payum的计划](https://github.com/speckcommerce/SpeckPaypal/issues/8)。
 
 * [Thelia](http://thelia.net/)
 
-French e-commerce solution. They [mentioned on their blog](http://thelia.net/thelia-attended-the-first-symfonycon-which-took-place-from-10th-to-14th-december-in-warsaw-poland/) that they want to integrate Payum.
+法国的电子商务解决方案。
+他们[在博客中也提及](http://thelia.net/thelia-attended-the-first-symfonycon-which-took-place-from-10th-to-14th-december-in-warsaw-poland/)想要接入payum的意向。
 
-Back to [index](index.md).
+返回 [首页](index.md).
