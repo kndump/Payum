@@ -1,6 +1,6 @@
-# Supported gateways.
+# 已支持的网关
 
-## Official
+## 官方支持
 
 * [Paypal Express Checkout](index.md#paypal-express-checkout)
 * [Paypal Pro Checkout](index.md#paypal-pro-checkout)
@@ -18,7 +18,7 @@
 * [Klarna Invoice](index.md#klarna-invoice)
 * [Sofort](index.md#sofort)
 
-## Community
+## 社区支持
 
 * [r3s7/PayumDineroMail](https://github.com/r3s7/PayumDineroMail)
 * [r3s7/PayumBitPay](https://github.com/r3s7/PayumBitPay)
@@ -52,7 +52,7 @@
 * [sourcefabric/payum-mollie](https://github.com/sourcefabric/payum-mollie)
 * [sourcefabric/payum-mbe4](https://github.com/sourcefabric/payum-mbe4)
 
-## Omnipay gateways.
+## Omnipay 网关
 
 * [thephpleague/omnipay-2checkout](https://github.com/thephpleague/omnipay-2checkout)
 * [lokielse/omnipay-alipay](https://github.com/lokielse/omnipay-alipay)
@@ -95,7 +95,7 @@
 * [aTastyCookie/yandexmoney_omnipay](https://github.com/aTastyCookie/yandexmoney_omnipay)
 * [antqa/payum-perfectmoney](https://github.com/antqa/payum-perfectmoney)
 
-## JMS payment plugins
+## JMS 支付插件
 
 * [Paypal Express Checkout](http://jmsyst.com/bundles/JMSPaymentPaypalBundle)
 * [Slim CD](https://github.com/mpoplin/TPMPaymentSlimCDBundle)
@@ -114,4 +114,4 @@
 * [Multisafepay](https://github.com/ruudk/PaymentMultisafepayBundle)
 * [Sips](https://github.com/KptiveStudio/KptivePaymentSipsBundle)
 
-Back to [index](index.md).
+返回 [首页](index.md).
