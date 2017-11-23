@@ -1,17 +1,17 @@
-# Develop a custom Payum gateway.
+# 开发一个自定义的Payum网关
 
-This chapter could be useful for a developer who wants to create a gateway on top of payum.
-The Payum provides a skeleton project which helps us a lots.
+本章节对于想要基于payum开发一个自定义网关的开发者是很有帮助的。
+Payum提供了一个骨架式的项目帮助我们了解如何实现。
 
-1. Create new project
+1. 创建一个新的项目
 
 ```bash
 $ composer create-project payum/skeleton
 ```
 
-2. Replace all occurrences of `payum` with your vendor name. It may be your github name, for now let's say you choose: `acme`.
-3. Replace all occurrences of `skeleton` with a payment gateway name. For example Stripe, Paypal etc. For now let's say you choose: `paypal`.
-4. Register a gateway factory to the payum's builder and create a gateway:
+2. 把所有出现 `payum` 的地方替换为你自己的vendor名称。这可能是你的github用户名，我们先假设你选用的是 `acme`。
+3. 把所有出现 `skeleton` 的地方替换为网关名称，例如 Stripe，Paypal等。我们先假设你选用的是 `paypal`。
+4. 向payum的构建器注册一个网关工厂，并创建一个网关。
 
 ```php
 <?php
@@ -32,7 +32,7 @@ $payum = (new PayumBuilder)
 ;
 ```
 
-5. While using the gateway implement all method where you get `Not implemented` exception:
+5. 自定义的网关要实现所有接口中定义的方法，否则在使用时会抛出 `Not implemented` 异常：
 
 ```php
 <?php
@@ -49,4 +49,4 @@ $model = new \ArrayObject([
 $paypal->execute(new Capture($model));
 ```
 
-Back to [index](index.md).
+返回 [首页](index.md).
