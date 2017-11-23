@@ -1,8 +1,10 @@
-# Logging
+# 日志
 
-Since we are dealing with payments it is required to log sensitive details. if the problem appear it would be easy to find out the problem when you have a good log file. This lib provide support of [PSR-3 compatible loggers](http://www.php-fig.org/psr/psr-3/).
+由于我们正在处理支付业务，因此需要记录一些重要的细节。
+如果出现了什么问题，那么一个好的日志文件，可以帮助我们很容易发现问题。
+这个库提供对[遵循PSR-3规范的日志](http://www.php-fig.org/psr/psr-3/)的支持。
 
-To inject a logger you have to create a logger itself, and add an extension with that logger to a gateway.
+你需要先创建一个日志记录器，注入进去，然后将该日志扩展添加进网关。
 
 ```php
 <?php
@@ -19,7 +21,8 @@ $gateway->addAction(new LoggerAwareAction);
 $gateway->execute('a request');
 ```
 
-After you are done you can simply implement `LoggerAwareInterface` interface to an action where you want log something. It will be injected by the extension.
+完成这些之后，你只需要简单的在你想要记录日志的`行为`中实现 `LoggerAwareInterface` 接口。
+它会被扩展注入。
 
 ```php
 <?php
@@ -62,4 +65,4 @@ class LoggerAwareAction implements ActionInterface, LoggerAwareInterface
 }
 ```
 
-Back to [index](index.md).
+返回 [首页](index.md).
