@@ -1,7 +1,7 @@
-# ISO4217 or Currency Details. 
+# ISO4217 或 币种细节 
 
-Payum provides ability to get currency details listed in [ISO4217](http://en.wikipedia.org/wiki/ISO_4217) specification.
-To get this information you have to execute a GetCurrency request with a currency code.
+Payum 提供了获取在[ISO4217](http://en.wikipedia.org/wiki/ISO_4217)规范中被列出的币种细节的能力。
+为了获取信息，你需要执行一个针对具体币种代码的 GetCurrency 请求。
 
 
 ```php
@@ -19,10 +19,10 @@ echo $currency->name;    // US Dollar
 echo $currency->exp;     // 2
 echo $currency->country; // US
 
-// and so on...
+// 等等信息...
 ```
 
-Or inside another action:
+或者在其他行为内部实现：
 
 ```php
 <?php
@@ -45,10 +45,14 @@ class FooAction implements ActionInterface, GatewayAwareInterface
         echo $currency->exp;     // 2
         echo $currency->country; // US
     }
+    
+    public function supports($request) {
+        // TODO: Implement supports() method.
+    }
 }
 ```
 
-Or directly ISO4217 service:
+再或者直接使用 ISO4217 服务:
 
 ```php
 <?php
@@ -65,10 +69,10 @@ echo $currency->getExp();     // 2
 echo $currency->getCountry(); // US
 ```
 
-## Next 
+## 继续阅读 
 
-* [The architecture](the-architecture.md).
-* [Supported gateways](supported-gateways.md).
-* [Storages](storages.md).
+* [应用架构](the-architecture.md).
+* [已支持的网关](supported-gateways.md).
+* [存储](storages.md).
 
-Back to [index](index.md).
+返回 [首页](index.md).
