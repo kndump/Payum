@@ -1,9 +1,9 @@
 # PHP7
 
-Payum works on PHP7 though some features are not working yet:
+Payum可以运行在PHP7环境中，但是有一些特性还不能正常使用：
 
-* Doctrine MongoODM storage is not supported because it rely on legacy php extension mongo. The extension is planned to be released for PHP7.
-* Authorize.NET AIM official library does not support PHP7 yet.
-* KlarnaInvoice uses XMLRPC library. It does not compatible with PHP7 yet.
+* Doctrine MongoODM 存储还不支持，因为它依赖于PHP扩展mongo。这个扩展中针对PHP7的正式版还在计划中。
+* Authorize.NET AIM 官方扩展还不支持PHP7。
+* KlarnaInvoice 使用了 XMLRPC 库. 这个库还不兼容PHP7。
 
-* [Back to index](index.md).
+* [返回首页](index.md).
