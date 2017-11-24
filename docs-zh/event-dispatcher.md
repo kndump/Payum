@@ -1,8 +1,9 @@
 # Event Dispatcher
 
-The EventDispatcherExtensions provides a Bridge to the [Symfony EventDispatcher Component](http://symfony.com/doc/current/components/event_dispatcher/index.html). The EventDispatcherComponent allows you to add behaviour without changing Payum.
+事件分发扩展提供了一种桥接到 [Symfony EventDispatcher 组件](http://symfony.com/doc/current/components/event_dispatcher/index.html)的方式。
+EventDispatcherComponent使得我们可以不用修改Payum就为它添加行为。
 
-## Enable the EventDispatcherExtension
+## 启用事件分发扩展
 
 ```php
 <?php
@@ -17,7 +18,7 @@ $gateway->addExtension(
 );
 ```
 
-## Listen to an Event
+## 监听事件
 
 ```php
 <?php
@@ -30,20 +31,20 @@ use Payum\Core\Bridge\Symfony\PayumEvents;
 $eventDispatcher->addListener(
     PayumEvents::GATEWAY_EXECUTE,
     function(ExecuteEvent $event) {
-        // do something
+        // 做一些处理
     }
 );
 ```
 
-| Name | `PayumEvents` Constant | Argument passed to the listener |
+| 事件名称 | `PayumEvents` 常量 | 传入监听器的参数 |
 | --- | --- | ---|
 | payum.gateway.pre_execute | `PayumEvents::GATEWAY_PRE_EXECUTE` | `ExecuteEvent` |
 | payum.gateway.execute | `PayumEvents::GATEWAY_EXECUTE` | `ExecuteEvent` |
 | payum.gateway.post_execute | `PayumEvents::GATEWAY_POST_EXECUTE` | `ExecuteEvent` |
 
-## Benefit with PayumBundle
+## PayumBundle的优势
 
-If you use Symfony Full-Stack Framework and the PayumBundle you can add the EventDispatcherExtension via Configuration:
+如果你使用的是Symfony全栈框架和PayumBundle，那你就完全可以通过配置文件来新增事件分发扩展。
 
 ```yaml
 services:
@@ -54,7 +55,7 @@ services:
             - { name: payum.extension, all: true, prepend: false }
 ```
 
-And add the listener:
+然后添加监听器：
 
 ```yaml
 services:
@@ -64,4 +65,4 @@ services:
             - { name: kernel.event_listener, event: payum.gateway.execute }
 ```
 
-Back to [index](index.md).
+返回 [首页](index.md).
